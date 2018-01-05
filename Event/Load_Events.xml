@@ -1,0 +1,4 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="ENCOUNTER_LOOT_RECEIVED.lua"/>
+	<Script file="PLAYER_MONEY.lua"/>
+</Ui>
