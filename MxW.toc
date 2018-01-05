@@ -1,6 +1,6 @@
-﻿## Interface: 70000
+﻿## Interface: 70300
 ## Title: |cff1784d1MxW|r
-## Version: 1.0.0_7.2.5
+## Version: 1.0.0_7.3.2
 ## Author: mikx
 ## Notes: MxW Addon
 ## RequiredDeps: TradeSkillMaster, TradeSkillMaster_AuctionDB
