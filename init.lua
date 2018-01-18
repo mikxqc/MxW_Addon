@@ -4,9 +4,9 @@
 -- Licensed under the GNU General Public License 3.0
 -- See included License file for more informations.
 
-local MxW, mx = ...
-local MX = LibStub("AceAddon-3.0"):NewAddon(mx, MxW, "AceConsole-3.0", "AceEvent-3.0", "AceHook-3.0");
+local MX = LibStub("AceAddon-3.0"):NewAddon("MxW", "AceConsole-3.0", "AceEvent-3.0", "AceHook-3.0");
 local L = LibStub("AceLocale-3.0"):GetLocale("MxW");
+local AceGUI = LibStub("AceGUI-3.0")
 
 local MXLDB = LibStub("LibDataBroker-1.1"):NewDataObject("MxW", {
 	type = "data source",
@@ -16,43 +16,52 @@ local MXLDB = LibStub("LibDataBroker-1.1"):NewDataObject("MxW", {
 })
 local icon = LibStub("LibDBIcon-1.0")
 
+local defaults = {
+	profile = {
+		debug = false,
+		version = 0,
+		minimapIcon = { hide = false, minimapPos = 220, radius = 80, },
+		mainUI = 0
+	}
+}
+
 function MX:OnInitialize()
-	self.db = LibStub("AceDB-3.0"):New("MxWDB", {
-		profile = {
-			minimap = {
-				hide = false,
-			},
-		},
-	})
-	icon:Register("MxW", MXLDB, self.db.profile.minimap)
+	self.db = LibStub:GetLibrary("AceDB-3.0"):New("MxWDB")
+
+	-- Init Saved Variables
+	if (Farmer_Logic_Day == nil) then
+		local weekday, month, day, year = CalendarGetDate();
+	  Farmer_Logic_Day = day;
+	end
+	if (Farmer_Money_DayGlobal == nil) then
+	  Farmer_Money_DayGlobal = 0;
+	end
+	if (Farmer_Money_MonthGlobal == nil) then
+	  Farmer_Money_MonthGlobal = 0;
+	end
+	if (Farmer_Logic_MinUI == nil) then
+	  Farmer_Logic_MinUI = 3000;
+	end
+	if (Farmer_Logic_MinAlert == nil) then
+	  Farmer_Logic_MinAlert = 3000;
+	end
+
+	if (self.db.profile.mainUI == nil) then
+		self.db.profile.mainUI = { ["height"] = 100, ["top"] = 50, ["left"] = 50, ["width"] = 300, }
+	end
+
+	if (self.db.profile.lootlistUI == nil) then
+		self.db.profile.lootlistUI = { ["height"] = 100, ["top"] = 50, ["left"] = 50, ["width"] = 300, }
+	end
+
+	-- Meta Data
+	local mxwVersion = GetAddOnMetadata("MxW", "Version")
+	self.db.profile.version = mxwVersion
+
+	-- Message
+	print("MxW v." .. self.db.profile.version .. L["Message_Loaded"]);
 end
 
--- Meta Data
-local mxwVersion = GetAddOnMetadata("MxW", "Version")
-
--- Init Saved Variables
-if (Farmer_Logic_Day == nil) then
-	local weekday, month, day, year = CalendarGetDate();
-  Farmer_Logic_Day = day;
+function MX:OnEnable()
+	  MX:ShowMainUI()
 end
-if (Farmer_Money_DayGlobal == nil) then
-  Farmer_Money_DayGlobal = 0;
-end
-if (Farmer_Money_MonthGlobal == nil) then
-  Farmer_Money_MonthGlobal = 0;
-end
-if (Farmer_Money_DayPlayer == nil) then
-  Farmer_Money_DayPlayer = 0;
-end
-if (Farmer_Money_MonthPlayer == nil) then
-  Farmer_Money_MonthPlayer = 0;
-end
-if (Farmer_Logic_MinUI == nil) then
-  Farmer_Logic_MinUI = 3000;
-end
-if (Farmer_Logic_MinAlert == nil) then
-  Farmer_Logic_MinAlert = 3000;
-end
-
--- Message
-print("MxW v." .. mxwVersion .. L["Message_Loaded"]);

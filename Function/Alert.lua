@@ -6,7 +6,6 @@
 
 local MX = LibStub("AceAddon-3.0"):GetAddon("MxW");
 local L = LibStub("AceLocale-3.0"):GetLocale("MxW");
-print("Alert.lua has been loaded.");
 
 -- Alert Cooking
 -- Based on [[ AchievementAlertFrame ]] from Blizzard

@@ -21,12 +21,15 @@ L["MainForm_Label_Close"] = "FERMER";
 L["MainForm_Label_Money_Lab_Today"] = "Auj.";
 L["MainForm_Label_Money_Lab_Month"] = "Mois";
 L["MainForm_Label_Money_Global"] = "Or (Global) :"
-L["MainForm_Label_Money_Player"] = "Or (Joueur):"
+L["MainForm_Label_Money_Player"] = "Or (Joueur) :"
 L["MainForm_Label_Money_Last"] = "Dernier Loot :";
 L["MainForm_Label_Money_Min"] = "Min.";
 L["MainForm_Label_LastBoE"] = "Dernier BOE :"
 L["MainForm_Label_LastBoE_NONE"] = "n/d"
 L["MainForm_Label_Loot"] = "- BUTIN -";
+L["MainForm_Button_LootList"] = "Liste de loot(s)";
+L["MainForm_Group_Features"] = "Fonctions";
+L["MainForm_Group_Gold"] = "Or";
 
 -- Alert Classes
 L["Alert_Class_Consumable"] = "Consommable";

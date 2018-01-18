@@ -22,10 +22,13 @@ L["MainForm_Label_Money_Lab_Today"] = "Today";
 L["MainForm_Label_Money_Lab_Month"] = "Month";
 L["MainForm_Label_Money_Global"] = "Gold (Global):"
 L["MainForm_Label_Money_Player"] = "Gold (Player):"
-L["MainForm_Label_Money_Last"] = "Last Loot :";
+L["MainForm_Label_Money_Last"] = "Last Loot:";
 L["MainForm_Label_Money_Min"] = "Min.";
 L["MainForm_Label_LastBoE"] = "Last BOE:"
 L["MainForm_Label_LastBoE_NONE"] = "n/a"
 L["MainForm_Label_Loot"] = "- LOOT -";
+L["MainForm_Button_LootList"] = "Loot List";
+L["MainForm_Group_Features"] = "Fonctions";
+L["MainForm_Group_Gold"] = "Or";
 
 L["Alert_TradeGoods"] = "Trade Goods";

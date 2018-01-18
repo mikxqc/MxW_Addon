@@ -1,12 +1,11 @@
 ﻿## Interface: 70300
 ## Title: |cff1784d1MxW|r
-## Version: 1.0.0_7.3.2
+## Version: 1.1.1b_7.3.5
 ## Author: mikx
 ## Notes: MxW Addon
 ## RequiredDeps: TradeSkillMaster, TradeSkillMaster_AuctionDB
 ## OptionalDeps: TradeSkillMaster_WoWuction, TheUndermineJournal
-## SavedVariables: MxWDB,Farmer_Logic_Day,Farmer_Logic_MinUI,Farmer_Logic_MinAlert,Farmer_Money_MonthGlobal,Farmer_Money_DayGlobal
-## SavedVariablesPerCharacter: Farmer_Logic_PlayerDay,Farmer_Money_MonthPlayer,Farmer_Money_DayPlayer
+## SavedVariables: MxWDB,CurrentGold,Farmer_Logic_Day,Farmer_Logic_MinUI,Farmer_Logic_MinAlert,Farmer_Money_MonthGlobal,Farmer_Money_DayGlobal
 
 Libraries\Load_Libraries.xml
 Locale\Load_Locales.xml

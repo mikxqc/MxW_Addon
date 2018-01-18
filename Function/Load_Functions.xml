@@ -3,6 +3,5 @@
 	<Script file="DB.lua"/>
 	<Script file="Math.lua"/>
 	<Script file="Money.lua"/>
-	<Script file="Option.lua"/>
 	<Script file="TSM.lua"/>
 </Ui>
