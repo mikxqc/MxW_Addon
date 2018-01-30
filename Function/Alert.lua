@@ -64,8 +64,8 @@ end
 
 local FarmerAlert = AlertFrame:AddQueuedAlertFrameSubSystem("AchievementAlertFrameTemplate", CookAlert, 2, 6);
 
-function MX:SendAlert(itemId,value)
-  local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount, itemEquipLoc, itemTexture, itemSellPrice = GetItemInfo(itemId)
+function MX:SendAlert(iLink,value)
+  local itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount, itemEquipLoc, itemTexture, itemSellPrice = GetItemInfo(iLink)
 
   if ( not AchievementFrame ) then
     AchievementFrame_LoadUI();
@@ -73,7 +73,7 @@ function MX:SendAlert(itemId,value)
 
   fvalue = MX:FormatMoney(value);
 
-  FarmerAlert:AddAlert(itemId,fvalue);
+  FarmerAlert:AddAlert(itemName,fvalue);
   PlaySoundFile("Sound\\Spells\\AchievmentSound1.ogg")
 end
 

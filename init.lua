@@ -40,10 +40,10 @@ function MX:OnInitialize()
 	  Farmer_Money_MonthGlobal = 0;
 	end
 	if (Farmer_Logic_MinUI == nil) then
-	  Farmer_Logic_MinUI = 3000;
+	  Farmer_Logic_MinUI = 500000; -- 50 golds
 	end
 	if (Farmer_Logic_MinAlert == nil) then
-	  Farmer_Logic_MinAlert = 3000;
+	  Farmer_Logic_MinAlert = 1000000; -- 100 golds
 	end
 
 	if (self.db.profile.mainUI == nil) then

@@ -32,7 +32,8 @@ L["MainForm_Group_Features"] = "Fonctions";
 L["MainForm_Group_Gold"] = "Or";
 
 -- Alert Classes
+L["Alert_Class_Misc"] = "Divers";
 L["Alert_Class_Consumable"] = "Consommable";
-L["Alert_Class_TradeGoods"] = "Matériaux d'artisanat";
+L["Alert_Class_TradeGoods"] = "Artisanat";
 L["Alert_Class_Weapon"] = "Arme";
 L["Alert_Class_Armor"] = "Armure";

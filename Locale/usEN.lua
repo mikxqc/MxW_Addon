@@ -31,4 +31,9 @@ L["MainForm_Button_LootList"] = "Loot List";
 L["MainForm_Group_Features"] = "Fonctions";
 L["MainForm_Group_Gold"] = "Or";
 
-L["Alert_TradeGoods"] = "Trade Goods";
+-- Alert Classes
+L["Alert_Class_Misc"] = "Miscellaneous";
+L["Alert_Class_Consumable"] = "Consumable";
+L["Alert_Class_TradeGoods"] = "Trade Goods";
+L["Alert_Class_Weapon"] = "Weapon";
+L["Alert_Class_Armor"] = "Armor";
