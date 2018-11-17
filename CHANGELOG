@@ -1,2 +1,51 @@
-[0.0.10][June 11, 2017]
-- Experimental Release
+[1.5.0][February 18, 2018]
+U Updated the locales of the main UI.
+U Removed the message displaying the daily record when the player enter the world.
+U Updated the day reset logic.
+U Updated the reset logic.
+A Added a day counter to the main UI.
+A Added a logic reseting the addon for a new month on DayCounter 31.
+A Added a command: "/mxw config" to show the settings.
+
+[1.4.0][February 17, 2018]
+U Updated the daily value locales of the main UI.
+U Updated the daily record guild message.
+A Added a message displaying the daily record when the player enter the world.
+A The daily record value is now displayed on the main UI.
+
+[1.3.3][February 12, 2018]
+U Updated the dependencies for the TSM4 beta.
+
+[1.3.2][February 12, 2018]
+F Fixed an init bug. Don't commit codes before testing...
+
+[1.3.1][February 12, 2018]
+F Fixed a bug with the daily stage message system.
+U Updated the daily stage message locales.
+
+[1.3.0][February 12, 2018]
+U Chat system optimization.
+U General code optimization.
+A Added a daily stage message for the daily money counter.
+A Added a daily record system for the daily money counter.
+
+[1.2.0][February 11, 2018]
+A Added a guild message system sending the alert content to the guild channel.
+A Added a command: "/mxw gmsg" to turn on/off the guild message.
+
+[1.1.1][February 11, 2018]
+F Fixed the bug clearing the daily counter on each new client launch.
+
+[1.1.0][February 11, 2018]
+U The daily counter is now reset during the addon init on a new day.
+A Added a command: "/mxw reset" to reset the monthly counter.
+A Added a command: "/mxw alert" to turn on/off the alert.
+
+[1.0.0][January 30, 2018]
+! First stable release. (If you are still using 1.3.0b, update ASAP!)
+F Fixed the alert being empty under certain circumstances.
+F Fixed a bug where a previous alert was repeating if you looted a corpse with money only.
+U The alert frame now use the item link instead of using the name.
+U Improved the Alert frame appearance.
+A Added a settings frame with the minimum alert threshold and a reset button.
+A Added a command: "/mxw restore" to restore the backed up global variable after a reset.

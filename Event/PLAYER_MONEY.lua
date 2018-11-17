@@ -1,6 +1,6 @@
 -- MxW (MxW Addon)
 -- By mikx
--- https://git.mikx.ca/wow-addons/MxW_Addon
+-- https://git.mikx.xyz/wow/MxW_Addon
 -- Licensed under the GNU General Public License 3.0
 -- See included License file for more informations.
 
@@ -17,19 +17,28 @@ PLAYER_MONEY_Frame:SetScript("OnEvent", function(self, event, ...)
 
     if (DiffGold > 0) then -- Gold gain
 
-      local weekday, month, day, year = CalendarGetDate();
-      -- Reset Global Daily Counter
-      if (Farmer_Logic_Day ~= day) then
-        Farmer_Money_DayGlobal = 0;
-        MX:UpdateMainUI()
-        Farmer_Logic_Day = day;
-      end
+      local date = C_Calendar.GetDate()
+    	local weekday = date.weekday
+    	local month = date.month
+    	local day = date.monthDay
+    	local year = date.year
 
       -- Write to SavedVariables
       Farmer_Money_MonthGlobal = Farmer_Money_MonthGlobal + DiffGold;
       Farmer_Money_DayGlobal = Farmer_Money_DayGlobal + DiffGold;
 
+      if(Farmer_Money_DayGlobal >= DailyRecord and DailyRecordFlag == false) then
+        MX:ChatGuildDailyRecord(DailyRecord)
+        DailyRecord = Farmer_Money_DayGlobal;
+        DailyRecordFlag = true;
+      end
+
+      if(DailyRecordFlag) then
+        DailyRecord = Farmer_Money_DayGlobal;
+      end
+
       MX:UpdateMainUI()
+      MX:ChatGuildDailyMoneyThresholdMessage(Farmer_Money_DayGlobal)
 
   elseif (DiffGold <= 0) then -- Gold lost
 
