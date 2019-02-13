@@ -1,6 +1,6 @@
-﻿## Interface: 70300
+﻿## Interface: 80100
 ## Title: |cff1784d1MxW|r
-## Version: 1.6.0_8.0.1
+## Version: 1.6.1_8.1.0
 ## Author: mikx
 ## Notes: MxW Addon
 ## RequiredDeps: TradeSkillMaster
