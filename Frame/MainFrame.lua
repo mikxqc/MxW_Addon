@@ -12,6 +12,9 @@ local GUI_LOOTCOLLECTED, GUI_SCROLLCONTAINER
 local lootCollectedLastEntry = nil
 local mxwVersion = GetAddOnMetadata("MxW", "Version")
 
+local date = C_Calendar.GetDate();
+local weekday, month, day, year = date.weekday, date.month, date.monthDay, date.year;
+
 local backdrop = {
 		bgFile = [[Interface\Tooltips\UI-Tooltip-Background]],
 		edgeFile = [[Interface\Tooltips\UI-Tooltip-Border]],
@@ -28,24 +31,12 @@ local EditBoxMinAlert = AceGUI:Create("EditBox")
 
 function MX:ShowMainUI()
   local MAIN_UI = AceGUI:Create("Window")
-  MAIN_UI:SetHeight(80)
+  MAIN_UI:SetHeight(30)
   MAIN_UI:SetTitle("MxW " .. self.db.profile.version)
   MAIN_UI:SetStatusTable(self.db.profile.mainUI)
   MAIN_UI:SetLayout("List")
   MAIN_UI:SetWidth(200)
   MAIN_UI:EnableResize(false)
-
-	labDayCounter:SetFont("Interface\\Addons\\MxW\\Media\\Font\\Homespun.ttf", 10)
-  labDayCounter:SetColor(1, 1, 1)
-  labDayCounter:SetFullWidth(true)
-  MAIN_UI:AddChild(labDayCounter)
-
-	local labSpaceA = AceGUI:Create("Label")
-  labSpaceA:SetFont("Fonts\\FRIZQT__.TTF", 10)
-  labSpaceA:SetColor(1, 1, 1)
-  labSpaceA:SetFullWidth(true)
-  labSpaceA:SetText("  ")
-  MAIN_UI:AddChild(labSpaceA)
 
   labTodayGold:SetFont("Interface\\Addons\\MxW\\Media\\Font\\Homespun.ttf", 10)
   labTodayGold:SetColor(1, 1, 1)
@@ -162,19 +153,14 @@ end)
 local MainFrame_Event_PLAYER_ENTERING_WORLD  = CreateFrame("Frame")
 MainFrame_Event_PLAYER_ENTERING_WORLD :RegisterEvent("PLAYER_ENTERING_WORLD")
 MainFrame_Event_PLAYER_ENTERING_WORLD :SetScript("OnEvent", function(self, event, ...)
-	local date = C_Calendar.GetDate()
-	local weekday = date.weekday
-	local month = date.month
-	local day = date.monthDay
-	local year = date.year
-  -- Init gold variable
+	-- Init gold variable
   CurrentGold = GetMoney()
 	-- Reset Global Daily Counter
 	if(DailyRecord == nil) then
 		DailyRecord = Farmer_Money_DayGlobal;
 		DailyRecordFlag = false;
 	end
-	if (Farmer_Logic_Day ~= day) then
+	if (day ~= 0 and Farmer_Logic_Day ~= day) then
 		if(DailyRecordFlag) then
 			DailyRecordFlag = false;
 		end
@@ -190,27 +176,14 @@ MainFrame_Event_PLAYER_ENTERING_WORLD :SetScript("OnEvent", function(self, event
 		DailyEighty = false;
 		DailyNinety = false;
 		DailyHundred = false;
-		DayCounter = DayCounter + 1;
-	end
-	if (DayCounter >= 31) then
-		Farmer_Money_MonthBack = Farmer_Money_MonthGlobal;
-		Farmer_Money_MonthGlobal = 0;
-		Farmer_Money_DayGlobal = 0;
-		DayCounter = 1;
-		DailyRecord = 1;
-		DailyRecordFlag = false;
-		DailyTen = false;
-		DailyTwenty = false;
-		DailyThirty = false;
-		DailyForty = false;
-		DailyFifty = false;
-		DailySixty = false;
-		DailySeventy = false;
-		DailyEighty = false;
-		DailyNinety = false;
-		DailyHundred = false;
 	end
   MX:UpdateMainUI()
+end)
+
+local MainFrame_Event_PLAYER_LEAVING_WORLD = CreateFrame("Frame")
+MainFrame_Event_PLAYER_LEAVING_WORLD:RegisterEvent("PLAYER_LEAVING_WORLD")
+MainFrame_Event_PLAYER_LEAVING_WORLD:SetScript("OnEvent", function(self, event, ...)
+
 end)
 
 function MX:UpdateMainUI()
@@ -219,7 +192,6 @@ function MX:UpdateMainUI()
   labTodayGold:SetText(format("%s (%s)", MX:FormatMoney(Farmer_Money_DayGlobal),L["MainForm_Label_Money_Lab_Today"]))
   labMonthGold:SetText(format("%s (%s)", MX:FormatMoney(Farmer_Money_MonthGlobal),L["MainForm_Label_Money_Lab_Month"]))
 	labDailyRecord:SetText(format("%s %s", MX:FormatMoneyGoldOnly(DailyRecord), L["Chat_ChatGuildDailyRecordUI"]))
-	labDayCounter:SetText(format("%s %s%i/30|r (~%s/%s)", L["MainForm_Label_DayCounter"], DayColor, DayCounter, MX:FormatMoneyGoldOnly(GoldMedian),L["MainForm_Label_Money_Lab_Today"]))
 end
 
 function MX:ShowMain()

@@ -8,6 +8,9 @@ local MX = LibStub("AceAddon-3.0"):NewAddon("MxW", "AceConsole-3.0", "AceEvent-3
 local L = LibStub("AceLocale-3.0"):GetLocale("MxW");
 local AceGUI = LibStub("AceGUI-3.0")
 
+local date = C_Calendar.GetDate();
+local weekday, month, day, year = date.weekday, date.month, date.monthDay, date.year;
+
 local MXLDB = LibStub("LibDataBroker-1.1"):NewDataObject("MxW", {
 	type = "data source",
 	text = "MxW",
@@ -27,7 +30,6 @@ local defaults = {
 
 function MX:OnInitialize()
 	self.db = LibStub:GetLibrary("AceDB-3.0"):New("MxWDB")
-
 	-- Init Saved Variables
 	if (Farmer_Logic_Day == nil) then
 	  Farmer_Logic_Day = day;
@@ -136,6 +138,9 @@ local function MyAddonCommands(msg, editbox)
 			DailyRecordFlag = false;
 			ReloadUI();
 		end
+	elseif (msg == 'resetd') then
+		Farmer_Money_DayGlobal = 0;
+		ReloadUI();
 	elseif (msg == 'alert') then
 		if (Settings_Alert_Enabled) then
 			Settings_Alert_Enabled = false;

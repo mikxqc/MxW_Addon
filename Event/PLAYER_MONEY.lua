@@ -17,11 +17,8 @@ PLAYER_MONEY_Frame:SetScript("OnEvent", function(self, event, ...)
 
     if (DiffGold > 0) then -- Gold gain
 
-      local date = C_Calendar.GetDate()
-    	local weekday = date.weekday
-    	local month = date.month
-    	local day = date.monthDay
-    	local year = date.year
+      local date = C_Calendar.GetDate();
+    	local weekday, month, day, year = date.weekday, date.month, date.monthDay, date.year;
 
       -- Write to SavedVariables
       Farmer_Money_MonthGlobal = Farmer_Money_MonthGlobal + DiffGold;
