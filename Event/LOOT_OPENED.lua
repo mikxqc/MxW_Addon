@@ -1,6 +1,6 @@
 -- MxW (MxW Addon)
 -- By mikx
--- https://git.mikx.xyz/wow/MxW_Addon
+-- https://git.mikx.xyz/mikx/MxW_Addon
 -- Licensed under the GNU General Public License 3.0
 -- See included License file for more informations.
 
@@ -29,7 +29,10 @@ LOOT_OPENED_Frame:SetScript("OnEvent",
             -- get the iteminfo using the slot itemlink
             name, link, quality, iLevel, reqLevel, class, subclass, maxStack, equipSlot, texture, vendorPrice = GetItemInfo(iLink)
             -- get the item value using the link, return nil if the item has no value
-            value = MX.TSM:GetItemValue(link, "DBMarket");
+            local itemId = MX:ToItemID(link);
+            if (itemId ~= nil) then
+              value = MX.TSM:GetItemValue(itemId, "DBMarket");
+            end
 
             -- MINIMUM QUALITY SETTINGS ------
             local eq = 2 -- equipable quality
@@ -72,8 +75,12 @@ LOOT_OPENED_Frame:SetScript("OnEvent",
                   MX:ChatGuildLootMessage(link,value);
                 end
               end
-              value = nil
-              iLink = nil
+          end
+          if (value ~= nil) then
+            Farmer_Money_LootSession = Farmer_Money_LootSession + value;
+            MX:UpdateMainUI()
+            value = nil
+            iLink = nil
           end
           end
       end

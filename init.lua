@@ -1,6 +1,6 @@
 -- MxW (MxW Addon)
 -- By mikx
--- https://git.mikx.xyz/wow/MxW_Addon
+-- https://git.mikx.xyz/mikx/MxW_Addon
 -- Licensed under the GNU General Public License 3.0
 -- See included License file for more informations.
 
@@ -8,7 +8,7 @@ local MX = LibStub("AceAddon-3.0"):NewAddon("MxW", "AceConsole-3.0", "AceEvent-3
 local L = LibStub("AceLocale-3.0"):GetLocale("MxW");
 local AceGUI = LibStub("AceGUI-3.0")
 
-local date = C_Calendar.GetDate();
+local date = C_DateAndTime.GetCurrentCalendarTime();
 local weekday, month, day, year = date.weekday, date.month, date.monthDay, date.year;
 
 local MXLDB = LibStub("LibDataBroker-1.1"):NewDataObject("MxW", {
@@ -39,6 +39,9 @@ function MX:OnInitialize()
 	end
 	if (Farmer_Money_MonthGlobal == nil) then
 	  Farmer_Money_MonthGlobal = 0;
+	end
+	if (Farmer_Money_LootSession == nil) then
+	  Farmer_Money_LootSession = 0;
 	end
 	if (Farmer_Logic_MinUI == nil) then
 	  Farmer_Logic_MinUI = 500000; -- 50 golds
@@ -138,8 +141,11 @@ local function MyAddonCommands(msg, editbox)
 			DailyRecordFlag = false;
 			ReloadUI();
 		end
-	elseif (msg == 'resetd') then
+	elseif (msg == 'resetd' or msg == 'resetday') then
 		Farmer_Money_DayGlobal = 0;
+		ReloadUI();
+	elseif (msg == 'resetl' or msg == 'resetloot') then
+		Farmer_Money_LootSession = 0;
 		ReloadUI();
 	elseif (msg == 'alert') then
 		if (Settings_Alert_Enabled) then

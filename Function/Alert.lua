@@ -1,6 +1,6 @@
 -- MxW (MxW Addon)
 -- By mikx
--- https://git.mikx.xyz/wow/MxW_Addon
+-- https://git.mikx.xyz/mikx/MxW_Addon
 -- Licensed under the GNU General Public License 3.0
 -- See included License file for more informations.
 
@@ -42,9 +42,18 @@ function CookAlert(frame, item, fvalue)
   background:SetTexCoord(0, 0.605, 0, 0.703);
   background:SetPoint("TOPLEFT", 0, 0);
   background:SetPoint("BOTTOMRIGHT", 0, 0);
-  frame:SetBackdrop(backdrop)
-	frame:SetBackdropColor(0, 0, 0)
-	frame:SetBackdropBorderColor(0.4, 0.4, 0.4)
+	frame.Backdrop = CreateFrame("Frame", name.."Backdrop", f, "BackdropTemplate");
+	frame.Backdrop:SetAllPoints();
+	frame.Backdrop.backdropInfo = {
+        bgFile = "Interface\Tooltips\UI-Tooltip-Background",
+        edgeFile = "Interface\Tooltips\UI-Tooltip-Border",
+        edgeSize = 2,
+        insets = { left = 11, right = 12, top = 12, bottom = 9, },
+  };
+	frame.Backdrop:SetBackdrop(frame.Backdrop.backdropInfo);
+  --frame:SetBackdrop(backdrop)
+	frame.Backdrop:SetBackdropColor(51, 51, 51);
+	frame.Backdrop:SetBackdropBorderColor(0, 0, 0);
   --local iconBorder = frame.Icon.Overlay;
   --iconBorder:SetTexture("Interface\\AchievementFrame\\UI-Achievement-IconFrame");
   --iconBorder:SetTexCoord(0, 0.5625, 0, 0.5625);

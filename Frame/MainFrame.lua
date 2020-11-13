@@ -1,6 +1,6 @@
 -- MxW (MxW Addon)
 -- By mikx
--- https://git.mikx.xyz/wow/MxW_Addon
+-- https://git.mikx.xyz/mikx/MxW_Addon
 -- Licensed under the GNU General Public License 3.0
 -- See included License file for more informations.
 
@@ -12,7 +12,7 @@ local GUI_LOOTCOLLECTED, GUI_SCROLLCONTAINER
 local lootCollectedLastEntry = nil
 local mxwVersion = GetAddOnMetadata("MxW", "Version")
 
-local date = C_Calendar.GetDate();
+local date = C_DateAndTime.GetCurrentCalendarTime();
 local weekday, month, day, year = date.weekday, date.month, date.monthDay, date.year;
 
 local backdrop = {
@@ -25,27 +25,30 @@ local backdrop = {
 local labTodayGold = AceGUI:Create("Label")
 local labMonthGold = AceGUI:Create("Label")
 local labDailyRecord = AceGUI:Create("Label")
+local labLootSession = AceGUI:Create("Label")
 local labDayCounter = AceGUI:Create("Label")
 
 local EditBoxMinAlert = AceGUI:Create("EditBox")
 
 function MX:ShowMainUI()
   local MAIN_UI = AceGUI:Create("Window")
-  MAIN_UI:SetHeight(30)
+  MAIN_UI:SetHeight(100)
   MAIN_UI:SetTitle("MxW " .. self.db.profile.version)
   MAIN_UI:SetStatusTable(self.db.profile.mainUI)
   MAIN_UI:SetLayout("List")
   MAIN_UI:SetWidth(200)
   MAIN_UI:EnableResize(false)
 
-  labTodayGold:SetFont("Interface\\Addons\\MxW\\Media\\Font\\Homespun.ttf", 10)
+  labTodayGold:SetFont("Interface\\Addons\\MxW\\Media\\Font\\Consola.ttf", 12)
   labTodayGold:SetColor(1, 1, 1)
   labTodayGold:SetFullWidth(true)
+	labTodayGold:SetPoint("LEFT", 30, 15)
   MAIN_UI:AddChild(labTodayGold)
 
-  labMonthGold:SetFont("Interface\\Addons\\MxW\\Media\\Font\\Homespun.ttf", 10)
+  labMonthGold:SetFont("Interface\\Addons\\MxW\\Media\\Font\\Consola.ttf", 12)
   labMonthGold:SetColor(1, 1, 1)
   labMonthGold:SetFullWidth(true)
+	labMonthGold:SetPoint("LEFT", 30, 15)
   MAIN_UI:AddChild(labMonthGold)
 
   local labSpaceB = AceGUI:Create("Label")
@@ -55,15 +58,27 @@ function MX:ShowMainUI()
   labSpaceB:SetText("  ")
   MAIN_UI:AddChild(labSpaceB)
 
-	labDailyRecord:SetFont("Interface\\Addons\\MxW\\Media\\Font\\Homespun.ttf", 10)
+	labDailyRecord:SetFont("Interface\\Addons\\MxW\\Media\\Font\\Consola.ttf", 12)
   labDailyRecord:SetColor(1, 1, 1)
   labDailyRecord:SetFullWidth(true)
   MAIN_UI:AddChild(labDailyRecord)
 
-  local BUTTON_SETTINGS = AceGUI:Create("Button")
+	labLootSession:SetFont("Interface\\Addons\\MxW\\Media\\Font\\Consola.ttf", 12)
+  labLootSession:SetColor(1, 1, 1)
+  labLootSession:SetFullWidth(true)
+  MAIN_UI:AddChild(labLootSession)
+
+	local labSpaceB = AceGUI:Create("Label")
+	labSpaceB:SetFont("Fonts\\FRIZQT__.TTF", 10)
+	labSpaceB:SetColor(1, 1, 1)
+	labSpaceB:SetFullWidth(true)
+	labSpaceB:SetText("  ")
+	MAIN_UI:AddChild(labSpaceB)
+
+	local BUTTON_SETTINGS = AceGUI:Create("Button")
 	BUTTON_SETTINGS:SetAutoWidth(true)
-	BUTTON_SETTINGS:SetText(L["MainForm_Button_Settings"])
-  BUTTON_SETTINGS:SetPoint("RIGHT", 5, 15)
+	BUTTON_SETTINGS:SetText("C")
+  BUTTON_SETTINGS:SetPoint("LEFT", 5, 15)
 	BUTTON_SETTINGS:SetCallback("OnClick",
 		function()
 		    MX:ShowSettingsUI()
@@ -192,6 +207,7 @@ function MX:UpdateMainUI()
   labTodayGold:SetText(format("%s (%s)", MX:FormatMoney(Farmer_Money_DayGlobal),L["MainForm_Label_Money_Lab_Today"]))
   labMonthGold:SetText(format("%s (%s)", MX:FormatMoney(Farmer_Money_MonthGlobal),L["MainForm_Label_Money_Lab_Month"]))
 	labDailyRecord:SetText(format("%s %s", MX:FormatMoneyGoldOnly(DailyRecord), L["Chat_ChatGuildDailyRecordUI"]))
+	labLootSession:SetText(format("%s (Loot)", MX:FormatMoneyGoldOnly(Farmer_Money_LootSession)))
 end
 
 function MX:ShowMain()
